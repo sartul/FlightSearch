@@ -1,0 +1,80 @@
+ 
+<div class="container">
+  <header class="header clearfix">
+    <nav>
+      <ul class="nav nav-pills float-right">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    </nav>
+    <h3 class="text-muted">Flight Search</h3>
+  </header>
+
+  <main role="main">
+    <div class="jumbotron">
+      <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4"> 
+        <form role="form" class='form-horizontal'>
+            <h4>Please enter flight details</h4>
+            <label for="inputFlightNumber" class="sr-only">Flight number</label>
+            <input type="input" #flightNumber class="form-control" placeholder="Flight Number" autofocus>
+            <label for="inputOrigin" class="sr-only">Origin</label>
+            <input type="input" #origin class="form-control" placeholder="Origin">
+            <label for="inputDestination" class="sr-only">Origin</label>
+            <input type="input" #destination class="form-control" placeholder="Destination">
+            <label for="inputDate" class="sr-only">Origin</label>
+            <input type="date" #date class="form-control" placeholder="Date" >
+            <div style="color: red;"> {{errorMessage}} </div>
+            <div style="margin-left: 100px;margin-top:30px;">
+                <button class="btn btn-lg btn-primary btn-block"  (click)="SearchFlights(flightNumber.value,origin.value,destination.value,date.value)" style="width:150px;">Search</button>
+            </div>
+            
+          </form>
+      </div>  
+      <div class="col-4"></div>
+    </div>
+    </div>
+      
+    <h2>Flights found ({{flights?flights.length:0}})</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Flight No</th>
+            <th>Carrier</th>
+            <th>Origin</th>
+            <th>Departure</th>
+            <th>Destination</th>
+            <th>Arrival</th>
+            <th>Aircarft</th>
+            <th>Distance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let flight of flights">
+            <td>{{flight.flightNumber}}</td>
+            <td>{{flight.carrier}}</td>
+            <td>{{flight.origin}}</td>
+            <td>{{flight.departure}}</td>
+            <td>{{flight.destination}}</td>
+            <td>{{flight.arrival}}</td>
+            <td>{{flight.aircraft}}</td>
+            <td>{{flight.distance}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; Company 2017</p>
+  </footer>
+</div>
