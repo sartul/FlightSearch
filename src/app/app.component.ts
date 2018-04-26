@@ -15,8 +15,8 @@ export class AppComponent {
 
   SearchFlights(flightNumber:string, origin:string,destination:string,date:Date)
   { 
-    this.errorMessage = flightNumber || (origin && destination) || date ? "" 
-    : "Please enter Flight Number or Origin and Destination or Date";
+    this.errorMessage = (flightNumber || (origin && destination)) && date ? "" 
+    : "Please enter one of the search combination 1) Flight Number and Date or 2) Origin and Destination and Date";
     if(!this.errorMessage)
     {
       this.flightService.getFlightDetails(flightNumber,origin,destination,date)
@@ -24,7 +24,7 @@ export class AppComponent {
         {
           this.flights = flights;
         });
-      
     }
+    return false;
   }
 }

@@ -20,9 +20,23 @@ export class FlightService {
   getFlightDetails (flightNumber:string, origin:string,destination:string,date:Date): Observable<Flight[]> {
     let queryParameters;
     queryParameters = flightNumber ? "f=" + flightNumber : "";
-    queryParameters += origin ? "ori=" + origin : "";
-    queryParameters += destination ? "des=" + destination : "";
-    queryParameters += date ? "d=" + date : "";
+    if(queryParameters && origin && destination )
+    {
+        queryParameters += "&ori=" + origin + "&des=" + destination;
+    }
+    else if(origin && destination)
+    {
+      queryParameters += "ori=" + origin + "&des=" + destination;
+    }
+    if(queryParameters && date)
+    {
+        queryParameters += "&d=" + date;
+    }
+    else if (date)
+    {
+        queryParameters += "d=" + date;
+    }
+
     let api = this.serviceUrl + "?" + queryParameters;
     console.log(api);
     return this.http.get<Flight[]>(api)
